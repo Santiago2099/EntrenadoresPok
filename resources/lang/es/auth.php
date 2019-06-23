@@ -1,15 +1,16 @@
-<? php
-devolver [
-    / *
-    | ------------------------------------------------- -------------------------
-    | Autenticación de líneas de lenguaje
-    | ------------------------------------------------- -------------------------
+<?php
+return [
+    /*
+    |--------------------------------------------------------------------------
+    | Authentication Language Lines
+    |--------------------------------------------------------------------------
     |
-    | Las siguientes líneas de idioma se utilizan durante la autenticación para varios
-    | Mensajes que necesitamos mostrar al usuario. Eres libre de modificar
-    | Estas líneas de lenguaje de acuerdo a los requisitos de su aplicación.
+    | The following language lines are used during authentication for various
+    | messages that we need to display to the user. You are free to modify
+    | these language lines according to your application's requirements.
     |
-    * /
-    ' failed '    =>  ' Estas credenciales no coincide con nuestros registros. ' ,
-    ' throttle '  =>  ' Demasiados intentos de acceso. Por favor intente nuevamente en: segundos segundos. ' ,
+    */
+    'failed'   => 'Estas credenciales no coinciden con nuestros registros.',
+    'throttle' => 'Demasiados intentos de acceso. Por favor intente nuevamente en :seconds segundos.',
 ];
+© 2019 GitHub, Inc.

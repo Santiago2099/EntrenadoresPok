@@ -15,3 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('trainers', 'TrainerController');
+Route::resource('pokemons', 'PokemonsController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

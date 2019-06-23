@@ -1,15 +1,15 @@
-<? php
-devolver [
-    / *
-    | ------------------------------------------------- -------------------------
-    | Paginación Líneas de lenguaje
-    | ------------------------------------------------- -------------------------
+<?php
+return [
+    /*
+    |--------------------------------------------------------------------------
+    | Pagination Language Lines
+    |--------------------------------------------------------------------------
     |
-    | La biblioteca del paginador usa las siguientes líneas de lenguaje para construir
-    | Los sencillos enlaces de paginación. Eres libre de cambiarlos a cualquier cosa.
-    | desea personalizar sus vistas para que coincida mejor con su aplicación.
+    | The following language lines are used by the paginator library to build
+    | the simple pagination links. You are free to change them to anything
+    | you want to customize your views to better match your application.
     |
-    * /
-    ' previous '  =>  ' & laquo; Anterior ' ,
-    ' siguiente '      =>  ' Siguiente & raquo; ' ,
+    */
+    'previous' => '&laquo; Anterior',
+    'next'     => 'Siguiente &raquo;',
 ];
