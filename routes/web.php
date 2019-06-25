@@ -14,8 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('prueba/{name}', 'PruebaController@prueba');
+
 Route::resource('trainers', 'TrainerController');
-Route::resource('pokemons', 'PokemonsController');
+//Route::resource('pokemons', 'PokemonController');
+Route::get('trainers/{trainer}/pokemons','PokemonController@index');
+Route::post('trainers/{trainer}/pokemons','PokemonController@store');
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

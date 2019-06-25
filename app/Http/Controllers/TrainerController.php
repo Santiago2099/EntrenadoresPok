@@ -16,8 +16,11 @@ class TrainerController extends Controller
      */
     public function index(Request $request)
     {
-        $request->user()->authorizeRoles(['admin']);
-
+        if($request->user()!=null){
+            $request->user()->authorizeRoles(['user','admin']);
+        }else{
+            abort(401, 'this action is unauthorized');
+        }
         $trainers = Trainer::all();
 
         return view('trainers.index', compact('trainers'));
@@ -32,6 +35,7 @@ class TrainerController extends Controller
     {
         return view('trainers.create');
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -39,10 +43,10 @@ class TrainerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreTrainerRequest $request)
-    {
+    {   
         $trainer = new Trainer();
 
-        if ($request->hasFile('avatar')){
+        if($request->hasFile('avatar')){
             $file = $request->file('avatar');
             $name = time().$file->getClientOriginalName();
             $trainer->avatar = $name;
@@ -51,9 +55,9 @@ class TrainerController extends Controller
         $trainer->name = $request->input('name');
         $trainer->slug = $request->input('slug');
         $trainer->save();
-
+        
         return redirect()->route('trainers.index');
-        //return 'saved';
+        // return 'Saved';
     }
 
     /**
@@ -63,7 +67,7 @@ class TrainerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Trainer $trainer)
-    {
+    {   
         return view('trainers.show', compact('trainer'));
     }
 
@@ -88,16 +92,16 @@ class TrainerController extends Controller
     public function update(Request $request, Trainer $trainer)
     {
         $trainer->fill($request->except('avatar'));
-        if ($request->hasFile('avatar')) {
+         if($request->hasFile('avatar')){
             $file = $request->file('avatar');
             $name = time().$file->getClientOriginalName();
-            $trainer->avatar = $name; 
+            $trainer->avatar = $name;
             $file->move(public_path().'/images/', $name);
         }
         $trainer->save();
-
-        return redirect()->route('trainers.show', [$trainer])->with('status','El entrenador se a actualizado correctamente');
-        //return 'Update';
+        
+        return redirect()->route('trainers.show', [$trainer])->with('status','Entrenador actualizado correctament');
+        
     }
 
     /**
@@ -110,8 +114,8 @@ class TrainerController extends Controller
     {
         $file_path = public_path().'/images/'.$trainer->avatar;
         \File::delete($file_path);
+        
         $trainer->delete();
-        return redirect()->route('$trainers.index');
-        //return 'delete';
+        return redirect()->route('trainers.index');
     }
 }

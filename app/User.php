@@ -3,34 +3,32 @@
 namespace LaraDex;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use Notifiable;
-
+    
     public function roles(){
         return $this->belongsToMany('LaraDex\Role');
     }
-
+    
     public function authorizeRoles($roles){
-        if ($this->hasAnyRole($roles)) {
+        if($this->hasAnyRole($roles)){
             return true;
         }
-        abort(401,'this action is unauthorized');
+        abort(401, 'This action is unauthorized');
     }
 
     public function hasAnyRole($roles){
         if(is_array($roles)){
             foreach ($roles as $role) {
-                if ($this->hasRole($roles)){
+                if($this->hasRole($role)){
                     return true;
-                }
+                }    
             }
-
-        }else{
-            if ($this->hasRoles($roles)){
+        } else {
+            if($this->hasRole($roles)){
                 return true;
             }
         }
@@ -38,12 +36,11 @@ class User extends Authenticatable
     }
 
     public function hasRole($role){
-        if ($this->roles()->where('name',$role)->first()) {
+        if($this->roles()->where('name',$role)->first()){
             return true;
         }
         return false;
     }
-
     /**
      * The attributes that are mass assignable.
      *
@@ -60,14 +57,5 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password', 'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
     ];
 }

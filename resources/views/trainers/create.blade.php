@@ -2,14 +2,13 @@
 
 @section('title', 'Trainers Create')
 
-@section('content')	
-	@include('common.Errors')
+@section('content')
+	@include('common.errors')
+	{!! Form::open(['route' => 'trainers.store', 'method' => 'POST', 'files' => true ]) !!}
 
-	{!! Form::open(['route' => 'trainers.store', 'method' => 'POST', 'files' => true]) !!}
+		@include('trainers.form')
 
-	@include('trainers.form')
-
-	{!! Form::submit('Guardar', ['class' => 'btn btn-primary'])!!}
+		{!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
 	{!! Form::close()!!}
 
 @endsection
